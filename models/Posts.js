@@ -1,51 +1,24 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema(
+const PostSchema = new mongoose.Schema(
   {
-    header: {
+    userId: {
       type: String,
-      require: true,
-      min: 3,
-      max: 2000,
-      unique: true,
+      // required: true,
     },
     desc: {
       type: String,
-      required: true,
-      min: 20,
-      max: 10000,
-      unique: true,
+      max: 5000,
     },
-    password: {
+    img: {
       type: String,
-      required: true,
-      min: 6,
     },
-    balance: {
-      type: Number,
-      default: 0.0,
-    },
-    accountNumber: {
-      type: String,
-      unique: true,
-      trim: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-    amount: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    status: {
-      type: String,
-      default: "pending",
-      enum: ["pending", "completed"],
+    likes: {
+      type: Array,
+      default: [],
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Post", PostSchema);
