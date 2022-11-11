@@ -40,15 +40,24 @@ router.post("/login", async (req, res) => {
     await res.status(500).json(err);
   }
 });
-router.put("/update", async (req, res) => {
+router.put("/:id/update", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, {
+    const user = await Users.findByIdAndUpdate(req.params.id, {
       $set: req.body,
     });
     res.status(200).json(user);
   } catch (err) {
     return res.status(500).json(err);
   }
+});
+
+router.delete("/:id/delete", async (req, res) => {
+  try {
+      await Users.findByIdAndDelete(req.params.id);
+      res.status(200).json("🟢 Account Deleted succesfully!");
+    } catch (err) {
+      return res.status(500).json(err);
+    }
 });
 
 module.exports = router;
